@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Online Finder Platform</title>
+  <link rel="stylesheet" href="profile.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js" defer></script>
+  <script src="../firebase.js" type="module" defer></script>
+  <script src="profile.js" type="module" defer></script>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="container">
+    <header class="profile-header">
+      <a href="/Home.html">Home</a>
+      <button type="button" id="editButton">Edit</button>
+    </header>
+
+    <h2>Profile</h2>
+    <!-- View Mode -->
+    <div id="profileView">
+      <img id="display-profile-picture" src="/images/background.jpeg" alt="Profile Picture" class="profile-picture" />
+      <div id="profileDetails">
+        <p><strong>Name:</strong> <span id="display-name"></span></p>
+        <p><strong>Location:</strong> <span id="display-location"></span></p>
+        <p><strong>Phone Number:</strong> <span id="display-phone"></span></p>
+        <p><strong>Service:</strong> <span id="display-service"></span></p>
+        <p><strong>Email</strong> <span id="display-email"></span></p>
+      </div>
+    </div>
+
+    <!-- Edit Mode -->
+    <form id="profileForm" class="hidden">
+      <img id="profilePicture" src="/images/background.jpeg" alt="Profile Picture" class="profile-picture" />
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required />
+      
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" placeholder="Enter your location" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required />
+
+      <label for="service">Service</label>
+      <input type="text" id="service" name="service" placeholder="Enter your service" required />
+
+      <label for="profilePic">Update Profile Picture</label>
+      <input type="file" id="profilePic" name="profilePic" accept="image/*" />
+
+      <button type="submit" id="updateButton">Update Profile</button>
+    </form>
+
+    <section class="posts">
+      <div class="toggle-container">
+        <button id="toggleButton">Add Post</button>
+      </div>
+
+      <!-- Display Posts -->
+      <div id="displayPosts" class="toggle-section">
+        <h2>My Posts</h2>
+        <div id="postsContainer" class="posts-container"></div>
+      </div>
+
+      <!-- Add Post -->
+      <div id="addPost" class="toggle-section hidden">
+        <form id="newPostForm">
+          <input type="text" id="postTitle" placeholder="Enter post title" required />
+          <textarea id="postDescription" placeholder="Enter post description" required></textarea>
+          <input type="file" id="postImage" accept="image/*" required />
+          <button type="submit">Add Post</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script src="toggle.js"></script>
+</body>
+</html>
