@@ -20,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
         // Redirect based on the role
         if ($user['role'] == 'admin') {
-            header("Location: admin_dashboard.php");
+            header("Location: admin/admin_dash.php");
         }
         elseif($user['role'] == 'professional' || $user['role'] == 'professional' ){
-            header("Location: proff_dash.php");
+            header("Location: professional/prof_dash.php");
         }
         
         else {
-            header("Location: customer_dash.php");
+            header("Location: client/client_Dash.php");
         }
         exit();
     } else {

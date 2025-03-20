@@ -131,10 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['professional-signup'])
     <main>
         <section class="auth-section">
             <h2>Create Your Account</h2>
-            <div class="tab-header">
+            <!-- <div class="tab-header">
                 <button class="tab-button active" data-tab="customer-signup">Customer</button>
                 <button class="tab-button" data-tab="professional-signup">Professional</button>
-            </div>
+            </div> -->
             
             <!-- Customer Sign Up Form -->
             <div id="customer-signup" class="tab-content active">

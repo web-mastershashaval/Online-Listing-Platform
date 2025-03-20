@@ -259,14 +259,14 @@ if (isset($_SESSION['user']['id'])) {
     <nav>
         <h2>Menu</h2>
         <ul>
-            <li><img src="./images/dashboard.png" alt="favicon"><a href="dash.php" data-target="main-content">Dashboard</a></li>
-            <li><img src="./images/prof.png" alt="favicon"><a href="prof.html" data-target="main-content">Professionals</a></li>
-            <li><img src="./images/appointmen1.png" alt="favicon"><a href="appointment.php" data-target="main-content">Book Appointment</a></li>
-            <li><img src="./images/profile.png" alt="favicon"><a href="./profile.php" data-target="main-content">Profile Management</a></li>
-            <li><img src="./images/team.png" alt="favicon"><a href="users.php" data-target="main-content">User Management</a></li>
-            <li><img src="./images/money.jpg" alt="favicon"><a href="payment.php" data-target="main-content">Payments</a></li>
-            <li><img src="./images/messages.png" alt="favicon"><a href="messages.html" data-target="main-content">Messages</a></li>
-            <li><img src="./images/sign.png" alt="favicon"><a href="#" onclick="confirmSignout()">Signout</a></li>
+            <li><img src="../images/dashboard.png" alt="favicon"><a href="./dash.php" data-target="main-content">Dashboard</a></li>
+            <li><img src="../images/prof.png" alt="favicon"><a href="./professionals.php" data-target="main-content">Professionals</a></li>
+            <li><img src="../images/appointmen1.png" alt="favicon"><a href="./appointment.php" data-target="main-content">Book Appointment</a></li>
+            <li><img src="../images/profile.png" alt="favicon"><a href="./profile.php" data-target="main-content">Profile Management</a></li>
+            <!-- <li><img src="./images/team.png" alt="favicon"><a href="users.php" data-target="main-content">User Management</a></li> -->
+            <li><img src="../images/money.jpg" alt="favicon"><a href="./payment.php" data-target="main-content">Payments</a></li>
+            <!-- <li><img src="./images/messages.png" alt="favicon"><a href="messages.html" data-target="main-content">Messages</a></li> -->
+            <li><img src="../images/sign.png" alt="favicon"><a href="#" onclick="confirmSignout()">Signout</a></li>
         </ul>
     </nav>
 
@@ -309,7 +309,7 @@ document.querySelectorAll('nav a').forEach(link => {
 // Signout confirmation
 function confirmSignout() {
     if (confirm("Are you sure you want to sign out?")) {
-        window.location.href = "Home.php"; // Replace with actual logout URL
+        window.location.href = "../Home.php"; // Replace with actual logout URL
     }
 }
 

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
             'password' => $password,
             'role' => $role
         ]);
-        header("Location: users.php"); // Redirect to refresh the page
+        header("Location: admin_dash.php"); // Redirect to refresh the page
         exit();
     } catch (PDOException $e) {
         die("Error adding user: " . $e->getMessage());
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user'])) {
             'email' => $email,
             'role' => $role
         ]);
-        header("Location: users.php"); // Redirect to refresh the page
+        header("Location: admin_dash.php"); // Redirect to refresh the page
         exit();
     } catch (PDOException $e) {
         die("Error updating user: " . $e->getMessage());
@@ -74,7 +74,7 @@ if (isset($_GET['delete_id'])) {
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->execute(['id' => $id]);
-        header("Location: users.php"); // Redirect to refresh the page
+        header("Location: admin_dash.php"); // Redirect to refresh the page
         exit();
     } catch (PDOException $e) {
         die("Error deleting user: " . $e->getMessage());

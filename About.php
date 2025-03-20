@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="About.css" />
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="../firebase.js" type="module"></script>
-    <script src="About.js" type="module" defer></script>
+    <link rel="stylesheet" href="style/About.css" />
+    <script src="style/About.js" type="module" defer></script>
     <title>About</title>
 </head>
 <body>
@@ -16,12 +12,12 @@
     <h1><a href="Home.html">HOME-REPAIR</a></h1>
     <nav>
       <ul>
-        <li><a href="/Home.html">Home</a></li>
-        <li><a href="./About.html">About</a></li>
-        <li><a href="./Contact.html">Contact</a></li>
-        <li><a href="./login.html">Login</a></li>
-        <li><a href="./register.html">Register</a></li>
-        <a href="/Profile/profile.html" class="profile-button">
+        <li><a href="/Home.php">Home</a></li>
+        <li><a href="./About.php">About</a></li>
+        <li><a href="./Contact.php">Contact</a></li>
+        <li><a href="./login.php">Login</a></li>
+        <li><a href="./register.php">Register</a></li>
+        <a href="/Profile/profile.php" class="profile-button">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuANgsTrQGzCHaJdWoSJUPJreo6ODSmK_Eag&s" alt="Profile Image" 
                style="
                   background-color: red; 

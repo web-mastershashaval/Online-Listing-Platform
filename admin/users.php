@@ -74,7 +74,7 @@ if (isset($_GET['delete_id'])) {
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->execute(['id' => $id]);
-        header("Location: users.php"); // Redirect to refresh the page
+        header("Location: admin_dash.php"); // Redirect to refresh the page
         exit();
     } catch (PDOException $e) {
         die("Error deleting user: " . $e->getMessage());
@@ -173,7 +173,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addUserForm" method="POST" action="users.php">
+                    <form id="addUserForm" method="POST" action="usersbackend.php">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>

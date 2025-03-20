@@ -2,9 +2,9 @@
 session_start(); // Start session to manage user authentication
 
 // Debugging: Print session data
-//  echo "<pre>Session Data: ";
-//  print_r($_SESSION);
-// echo "</pre>";
+//   echo "<pre>Session Data: ";
+//   print_r($_SESSION);
+//  echo "</pre>";
 
 // Database connection
 $host = 'localhost';
@@ -129,13 +129,13 @@ $professionalAppointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Book an Appointment</h1>
 
         <!-- Notifications -->
-        <div class="notifications">
-            <!-- Display messages here if needed -->
-            <p>No messages to display.</p>
-        </div>
+        <!-- <div class="notifications">
+             Display messages here if needed -->
+            <!-- <p>No messages to display.</p> -->
+        </div> 
 
         <!-- Toggle Appointment Form Button -->
-        <button id="toggleAppointmentFormBtn" class="btn btn-primary" aria-expanded="false">Toggle Appointment Form</button>
+        <button id="toggleAppointmentFormBtn" class="btn btn-primary" aria-expanded="false">Appointment Form</button>
 
         <!-- Appointment Form -->
         <div class="appointment-form mt-3" id="appointmentForm">
@@ -153,42 +153,6 @@ $professionalAppointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <br>
-        <h1>Appointments from Client's Side</h1>
-
-        <!-- Client Appointments Table -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Client Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Appointment Date</th>
-                    <th>State of Problem</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($clientAppointments)): ?>
-                    <?php foreach ($clientAppointments as $appointment): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($appointment['name']); ?></td>
-                            <td><?php echo htmlspecialchars($appointment['email']); ?></td>
-                            <td><?php echo htmlspecialchars($appointment['phone']); ?></td>
-                            <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
-                            <td><?php echo htmlspecialchars($appointment['state_problem']); ?></td>
-                            <td>
-                                <a href="edit_appointment.php?id=<?php echo $appointment['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="appointment.php?delete_appointment=<?php echo $appointment['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="6" class="text-center">No appointments available.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
 
         <div class="section mt-5">
             <h2>Appointments from Professional's Side</h2>

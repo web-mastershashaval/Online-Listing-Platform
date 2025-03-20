@@ -1,3 +1,51 @@
+<?php
+session_start();
+
+// Database connection setup
+$host = 'localhost'; // Database host
+$dbname = 'listing-platform'; // Database name
+$username = 'root'; // Database username
+$password = ''; // Database password
+
+try {
+    // Establishing the PDO connection
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // In case of an error with the connection
+    echo 'Connection failed: ' . $e->getMessage();
+    exit; // Stop the script if the connection fails
+}
+
+// Get the user ID from session
+$user_id = $_SESSION['user']['id'];
+
+// Fetch the latest 2 appointments for the logged-in user
+$appointments_sql = "SELECT * FROM appointments WHERE user_id = ? ORDER BY appointment_date DESC LIMIT 2";
+$stmt = $pdo->prepare($appointments_sql);
+$stmt->execute([$user_id]);
+$appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch the user's profile data
+$user_sql = "SELECT * FROM users WHERE id = ?";
+$stmt = $pdo->prepare($user_sql);
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Fetch the latest payment status for the logged-in user
+$payment_sql = "SELECT * FROM payments WHERE user_id = ? ORDER BY payment_date DESC LIMIT 1";
+$stmt = $pdo->prepare($payment_sql);
+$stmt->execute([$user_id]);
+$payment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Fetch the professional assigned to the user (if any)
+$professional_sql = "SELECT * FROM users WHERE role = ?";
+$stmt = $pdo->prepare($professional_sql);
+$stmt->execute([$user_id]);
+$professional = $stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,68 +101,63 @@
     </style>
 </head>
 <body>
-    <!-- <h1>Welcome <span class="username">JohnDoe!</span></h1>
-    <hr><br> -->
 
     <!-- Grid Container -->
     <div class="grid-container">
         <!-- Appointments Section -->
         <div class="grid-item">
             <div class="image-container">
-                <img src="./images/appointmen1.png" style="width: 150px; height: 150px; border-radius: 50px;">
+                <img src="../images/appointmen1.png" style="width: 150px; height: 150px; border-radius: 50px;">
             </div>
             <i class="fas fa-calendar-alt"></i>
             <small>Your Appointments:</small><br>
-            <strong>John Doe</strong> - <span>October 25, 2023, 10:00 AM</span><br>
-            <strong>Jane Smith</strong> - <span>October 26, 2023, 2:00 PM</span><br>
-            <!-- If no appointments -->
-            <!-- <strong>No appointments booked yet.</strong> -->
+
+            <?php if (count($appointments) > 0): ?>
+                <?php foreach ($appointments as $appointment): ?>
+                    <strong><?php echo htmlspecialchars($appointment['state_problem']); ?></strong> - 
+                    <span><?php echo date("F j, Y, g:i A", strtotime($appointment['appointment_date'])); ?></span><br>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <strong>No appointments booked yet.</strong>
+            <?php endif; ?>
         </div>
 
-        <!-- Lawyer Section -->
+        <!-- Professional Section -->
         <div class="grid-item">
             <div class="image-container">
-                <img src="./images/prof.png" style="width: 150px; height: 150px; border-radius: 50px;">
+                <img src="../images/prof.png" style="width: 150px; height: 150px; border-radius: 50px;">
             </div>
             <small>Your Professional:</small><br>
-            <strong>Capeter John</strong>
-            <!-- If no lawyer selected -->
-            <!-- <strong>No lawyer selected.</strong> -->
+            <?php if ($professional): ?>
+                <strong><?php echo htmlspecialchars($professional['name']); ?></strong>
+            <?php else: ?>
+                <strong>No professional selected.</strong>
+            <?php endif; ?>
         </div>
-
-        <!-- Cases Section -->
-        <!-- <div class="grid-item">
-            <div class="image-container">
-                <img src="./images/case.png" style="width: 150px; height: 150px; border-radius: 50px;">
-            </div> -->
-            <!-- <small>Your Cases:</small><br>
-            <strong>Case Title 1</strong><br>
-            <strong>Case Title 2</strong><br> -->
-            <!-- If no cases -->
-            <!-- <strong>No cases available.</strong> -->
-        <!-- </div> -->
 
         <!-- Payments Section -->
         <div class="grid-item">
             <div class="image-container">
-                <img id="money" src="./images/money.jpg" style="width: 100px; height: auto;">
+                <img id="money" src="../images/money.jpg" style="width: 100px; height: auto;">
             </div>
             <small>Your Payments:</small><br>
-            <strong>ksh 5000</strong><br>
-            <strong>Paid</strong><br>
-            <!-- If no payments -->
-            <!-- <strong>No payments made yet.</strong> -->
+            <?php if ($payment): ?>
+                <strong>Ksh <?php echo htmlspecialchars($payment['amount']); ?></strong><br>
+                <strong><?php echo htmlspecialchars($payment['status']); ?></strong><br>
+            <?php else: ?>
+                <strong>No payments made yet.</strong>
+            <?php endif; ?>
         </div>
 
         <!-- Profile Section -->
         <div class="grid-item">
             <div class="image-container">
-                <img src="./images/profile.png" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50px;">
+                <img src="../images/profile.png" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50px;">
             </div>
             <h2>Your Profile</h2>
-            <strong>Name:</strong> John Doe<br>
-            <strong>Email:</strong> john.doe@example.com<br>
-            <strong>About:</strong> No information available.<br>
+            <strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?><br>
+            <strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?><br>
+            <strong>About:</strong> <?php echo htmlspecialchars($user['about'] ?? 'No information available.'); ?><br>
         </div>
 
         <!-- Notifications Section -->
@@ -123,16 +166,13 @@
                 <h2>Notifications</h2>
                 <p>You have upcoming appointments!</p>
                 <p>You have 3 new messages!</p>
-                <!-- If no notifications -->
-                <!-- <p>No upcoming appointments.</p> -->
-                <!-- <p>No new messages.</p> -->
             </div>
         </div>
 
         <!-- Basic Information Section -->
         <div class="grid-item">
             <div class="image-container">
-                <img src="./images/info.png" style="width: 150px; height: 150px; border-radius: 50px;">
+                <img src="../images/info.png" style="width: 150px; height: 150px; border-radius: 50px;">
             </div>
             <h2>Basic Information</h2>
             <p>To make an appointment, payment or sending a message choose a Professional first.</p>
@@ -205,5 +245,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

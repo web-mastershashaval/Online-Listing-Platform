@@ -17,26 +17,10 @@ include_once("./conn.php");
       <nav>
         <ul>
           <li><a href="./Home.php">Home</a></li>
-          <li><a href="./About.html">About</a></li>
-          <li><a href="./Contact.html">Contact</a></li>
+          <li><a href="./About.php">About</a></li>
+          <li><a href="./Contact.php">Contact</a></li>
           <li><a href="./login.php" id="login">Login</a></li>
           <li><a href="./register.php" id="register">Register</a></li>
-          <li><button id="logout-button" >Logout</button></li>
-          <a href="/Profile/profile.html" class="profile-button" id="profile-button">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuANgsTrQGzCHaJdWoSJUPJreo6ODSmK_Eag&s"
-              alt="Profile Image"
-              style="
-                background-color: red;
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-                object-fit: cover;
-                border: 2px solid white;
-              "
-            />
-          </a>
         </ul>
       </nav>
     </header>

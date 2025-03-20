@@ -75,194 +75,66 @@ session_start();
 
 
 <style>
-        /* Your existing CSS styles */
-        :root {
-            --primary-color: #007bff;
-            --primary-dark: #0056b3;
-            --background-color: #f4f4f4;
-            --white: #ffffff;
-            --text-color: #333;
-        }
-
-        body {
-            display: flex;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
-            flex-direction: column;
-            background-color: var(--background-color);
-            overflow-x: hidden;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--primary-color);
-            padding: 10px 20px;
-            color: var(--white);
-            position: fixed;
+        /* Custom CSS for the table */
+        table {
             width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        header .logo {
-            display: flex;
-            align-items: center;
-            font-size: 24px;
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
             font-weight: bold;
         }
 
-        header .logo img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
+        tr:hover {
+            background-color: #f1f1f1;
         }
 
-        .profile {
-            display: flex;
-            align-items: center;
+        h1 {
+            color: #333;
         }
 
-        .profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 15px;
-            border: 2px solid var(--white);
+        .payment-form {
+            display: none;  /* Initially hide the form */
+            margin-top: 20px;
         }
 
-        nav {
-            width: 235px;
-            background: var(--primary-dark);
-            color: var(--white);
-            padding: 20px;
-            position: fixed;
-            height: calc(100% - 60px);
-            top: 60px;
-            overflow-y: auto;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            transition: width 0.3s;
-        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
 
-        nav h2 {
-            color: var(--white);
-        }
+            th {
+                display: none;
+            }
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: flex;
-            align-items: center;
-            margin: 15px 0;
-        }
-
-        nav ul li img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        nav ul li a:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        main {
-            margin-left: 260px;
-            padding: 20px;
-            width: calc(100% - 260px);
-            margin-top: 60px;
-            transition: margin-left 0.3s, width 0.3s;
-        }
-
-        .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background: var(--white);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            /* Adjust layout for smaller screens */
-            nav {
+            td {
+                text-align: right;
                 position: relative;
-                width: 100%;
-                height: auto;
-                top: 0;
-                padding: 10px;
-                box-shadow: none;
-                margin-bottom: 20px;
+                padding-left: 50%;
             }
 
-            nav ul li {
-                justify-content: center;
-            }
-
-            main {
-                margin-left: 1;
-                width: 100%;
-            }
-
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .profile {
-                margin-top: 10px;
-            }
-
-            .logo img {
-                width: 40px;
-                height: 40px;
-            }
-
-            nav h2 {
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            /* For extra small screens like phones in portrait mode */
-            header {
-                padding: 5px 15px;
-            }
-
-            .profile img {
-                width: 30px;
-                height: 30px;
-            }
-
-            nav {
-                padding: 5px;
-            }
-
-            nav ul li {
-                font-size: 14px;
-            }
-
-            .section {
-                padding: 15px;
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 50%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
             }
         }
     </style>
